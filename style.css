@@ -1,0 +1,408 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    background:
+        linear-gradient(
+            rgba(245, 242, 235, 0.516),
+            rgba(245, 242, 235, 0.527)
+        ),
+        url("background.jpeg");
+
+    background-size: cover;
+    background-position: center;
+
+    overflow: hidden;
+}
+
+
+/* =================================
+   CONTAINER
+================================= */
+
+.container {
+    text-align: center;
+}
+
+
+/* =================================
+   AMPLOP
+================================= */
+
+.envelope {
+    position: relative;
+
+    width: 390px;
+    height: 255px;
+
+    margin: auto;
+
+    cursor: pointer;
+
+    perspective: 1200px;
+
+    filter:
+        drop-shadow(0 15px 25px rgba(0, 0, 0, 0.20));
+
+    transition: transform 0.3s ease;
+}
+
+.envelope:hover {
+    transform: scale(1.025);
+}
+
+
+/* =================================
+   BADAN AMPLOP
+================================= */
+
+.envelope-body {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: #f4ecdc;
+
+    border: 2px solid #b69a64;
+
+    border-radius: 5px;
+
+    overflow: hidden;
+
+    z-index: 3;
+}
+
+
+/* =================================
+   SURAT
+================================= */
+
+.letter {
+    position: absolute;
+
+    left: 5%;
+    bottom: 5%;
+
+    width: 90%;
+    height: 88%;
+
+    padding: 30px 20px;
+
+    background: #fffdf8;
+
+    border: 1px solid #d4c39e;
+
+    text-align: center;
+
+    z-index: 2;
+
+    transition: transform 1s ease;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
+}
+
+.letter h2 {
+    color: #8b6f3d;
+
+    font-size: 25px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 18px;
+}
+
+.letter p {
+    color: #555;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =================================
+   LIPATAN KIRI
+================================= */
+
+.fold-left {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-top: 125px solid transparent;
+    border-left: 190px solid #eee4d2;
+
+    z-index: 4;
+}
+
+
+/* =================================
+   LIPATAN KANAN
+================================= */
+
+.fold-right {
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-top: 125px solid transparent;
+    border-right: 190px solid #e8ddc9;
+
+    z-index: 4;
+}
+
+
+/* =================================
+   LIPATAN BAWAH
+================================= */
+
+.fold-bottom {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-left: 193px solid transparent;
+    border-right: 193px solid transparent;
+    border-bottom: 130px solid #f0e6d4;
+
+    z-index: 5;
+}
+
+
+/* =================================
+   PENUTUP ATAS
+================================= */
+
+.flap {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 0;
+    height: 0;
+
+    border-left: 195px solid transparent;
+    border-right: 195px solid transparent;
+    border-top: 140px solid #e5dac4;
+
+    transform-origin: top center;
+
+    z-index: 7;
+
+    transition:
+        transform 1s ease,
+        z-index 0s linear 0.5s;
+}
+
+
+/* =================================
+   SEGEL
+================================= */
+
+.seal {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    background: #9b7446;
+
+    border: 3px solid #76552f;
+
+    color: #fff8e9;
+
+    font-size: 25px;
+
+    z-index: 9;
+
+    box-shadow:
+        0 4px 10px rgba(0, 0, 0, 0.25);
+
+    transition:
+        transform 0.7s ease,
+        opacity 0.5s ease;
+}
+
+
+/* =================================
+   TULISAN BUKA UNDANGAN
+================================= */
+
+.open-text {
+    position: absolute;
+
+    left: 50%;
+    top: 70%;
+
+    transform: translate(-50%, -50%);
+
+    width: 100%;
+
+    text-align: center;
+
+    color: #745b35;
+
+    font-size: 19px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    z-index: 20;
+
+    pointer-events: none;
+
+    text-shadow:
+        0 1px 2px rgba(255, 255, 255, 0.9);
+
+    transition:
+        opacity 0.4s ease,
+        transform 0.4s ease;
+}
+
+
+/* =================================
+   PETUNJUK
+================================= */
+
+.instruction {
+    margin-top: 25px;
+
+    color: #0f0e0d;
+
+    font-size: 14px;
+
+    letter-spacing: 1px;
+
+    opacity: 0.8;
+}
+
+
+/* =================================
+   ANIMASI SAAT DIBUKA
+================================= */
+
+.envelope.open .flap {
+    transform: rotateX(180deg);
+
+    z-index: 1;
+}
+
+
+/* Surat keluar */
+
+.envelope.open .letter {
+    transform: translateY(-125px);
+
+    z-index: 6;
+}
+
+
+/* Segel menghilang */
+
+.envelope.open .seal {
+    transform:
+        translate(-50%, -50%)
+        scale(0.2);
+
+    opacity: 0;
+}
+
+
+/* Tulisan menghilang */
+
+.envelope.open .open-text {
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.8);
+}
+
+
+/* =================================
+   MOBILE
+================================= */
+
+@media (max-width: 600px) {
+
+    .envelope {
+        width: 320px;
+        height: 210px;
+    }
+
+    .flap {
+        border-left-width: 160px;
+        border-right-width: 160px;
+        border-top-width: 115px;
+    }
+
+    .fold-left {
+        border-left-width: 160px;
+        border-top-width: 105px;
+    }
+
+    .fold-right {
+        border-right-width: 160px;
+        border-top-width: 105px;
+    }
+
+    .fold-bottom {
+        border-left-width: 160px;
+        border-right-width: 160px;
+        border-bottom-width: 110px;
+    }
+
+    .seal {
+        width: 50px;
+        height: 50px;
+        font-size: 21px;
+    }
+
+    .open-text {
+        font-size: 16px;
+    }
+
+    .letter h2 {
+        font-size: 20px;
+    }
+}
